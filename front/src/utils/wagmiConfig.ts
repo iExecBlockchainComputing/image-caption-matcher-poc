@@ -96,5 +96,11 @@ createAppKit({
   projectId,
   defaultNetwork: bellecour,
   featuredWalletIds,
+  features: {
+    email: false,
+    socials: false,
+  },
   allWallets: 'HIDE',
+  allowUnsupportedChain: false,
+  enableWalletGuide: false,
 });
