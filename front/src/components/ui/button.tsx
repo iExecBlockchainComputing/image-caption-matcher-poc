@@ -5,12 +5,12 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { cn } from '@/utils/style.utils';
 
 const buttonVariants = cva(
-  'rounded-30 ring-offset-background focus-visible:ring-ring inline-flex items-center justify-center gap-1.5 whitespace-nowrap text-sm font-medium transition-colors duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'rounded-30 ring-offset-background cursor-pointer focus-visible:ring-ring inline-flex items-center justify-center gap-1.5 whitespace-nowrap text-sm font-medium transition-colors duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground hover:bg-grey-800 dark:hover:bg-grey-100 dark:hover:text-grey-800 hover:text-white',
+          'bg-primary text-primary-foreground hover:bg-primary-hover dark:hover:bg-grey-100 dark:hover:text-grey-800 hover:text-white',
         white: 'hover:bg-grey-400 bg-white text-black',
         danger: 'bg-[#BF3131] text-white hover:bg-[#BF3131]/40',
         outline: 'border-grey-50 border hover:bg-white/10 hover:text-white',
