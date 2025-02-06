@@ -4,11 +4,12 @@ import { TopNavBar } from '@/components/NavBar/TopNavBar.tsx';
 import ConnectWallet from '@/modules/ConnectWallet.tsx';
 import useUserStore from '@/stores/useUser.store.ts';
 import { Toaster } from '../components/ui/toaster.tsx';
-import { useWatchWagmiAccount } from '../utils/watchWagmiAccount.ts';
+import { useWatchAccount } from '@/hooks/useWatchAccount.ts';
 
 export default function MainLayout() {
-  useWatchWagmiAccount();
-  const isConnected = useUserStore();
+  useWatchAccount();
+  const { isConnected } = useUserStore();
+  
 
   return (
     <div className="flex">
@@ -16,7 +17,7 @@ export default function MainLayout() {
       <div className="w-full px-10">
         <TopNavBar />
         <div className="mb-24 mt-10 max-w-[1260px] flex-1">
-          {isConnected ? <ConnectWallet /> : <Outlet />}
+          {!isConnected ? <ConnectWallet /> : <Outlet />}
         </div>
       </div>
       <Toaster />
