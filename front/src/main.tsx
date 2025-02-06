@@ -9,13 +9,14 @@ import '@fontsource/mulish/latin-800.css';
 import { QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
 import { WagmiProvider } from 'wagmi';
 import { ConditionalRollbarWrapper } from '@/components/ConditionalRollbarWrapper.tsx';
 import { initQueryClient } from '@/utils/initQueryClient.ts';
 import { initRollbarAlerting } from '@/utils/initRollbarAlerting.ts';
-import App from './App';
 import { Toaster } from './components/ui/toaster.tsx';
 import './index.css';
+import { router } from './router.tsx';
 import { wagmiAdapter } from './utils/wagmiConfig.ts';
 
 const { rollbar, rollbarConfig } = initRollbarAlerting();
@@ -30,7 +31,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           rollbar={rollbar}
           rollbarConfig={rollbarConfig}
         >
-          <App />
+          <RouterProvider router={router} />
         </ConditionalRollbarWrapper>
       </QueryClientProvider>
     </WagmiProvider>

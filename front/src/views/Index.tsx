@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Footer } from '@/components/Footer';
-import { NavBar } from '@/components/NavBar/NavBar';
 import useUserStore from '@/stores/useUser.store';
 
-export function Landing() {
+export function Index() {
   const { isConnected } = useUserStore();
   const navigate = useNavigate();
 
@@ -14,11 +12,5 @@ export function Landing() {
     }
   }, [isConnected]);
 
-  return (
-    <div className="sm:container">
-      <NavBar />
-
-      <Footer />
-    </div>
-  );
+  return <div className="sm:container"></div>;
 }
