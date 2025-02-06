@@ -1,6 +1,6 @@
-import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
 import { Compass, FilePlus, LogOut, User, UserCheck } from 'react-feather';
+import { Link } from 'react-router-dom';
 import iExecLogo from '@/assets/iexec-logo.svg';
 import { useLoginLogout } from '@/hooks/useLoginLogout';
 import useUserStore from '@/stores/useUser.store';

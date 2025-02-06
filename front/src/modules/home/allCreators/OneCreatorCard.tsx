@@ -1,7 +1,7 @@
 import type { CollectionOwner } from '@iexec/dataprotector';
-import { Link } from '@tanstack/react-router';
 import { clsx } from 'clsx';
 import { Check } from 'react-feather';
+import { Link } from 'react-router-dom';
 import avatarStyles from '@/modules/profile/profile.module.css';
 import { useUserStore } from '@/stores/useUser.store';
 import { getAvatarVisualNumber } from '@/utils/getAvatarVisualNumber.ts';

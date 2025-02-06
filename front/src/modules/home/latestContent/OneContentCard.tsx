@@ -1,7 +1,7 @@
 import { ProtectedDataInCollection } from '@iexec/dataprotector';
-import { Link } from '@tanstack/react-router';
 import { clsx } from 'clsx';
 import { Lock } from 'react-feather';
+import { Link } from 'react-router-dom';
 import { useUserStore } from '@/stores/useUser.store';
 import { getCardVisualNumber } from '@/utils/getCardVisualNumber.ts';
 import { nrlcToRlc } from '@/utils/nrlcToRlc.ts';
