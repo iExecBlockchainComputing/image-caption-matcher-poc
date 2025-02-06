@@ -1,15 +1,12 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useAccount } from 'wagmi';
-import {
-  cleanDataProtectorSDK,
-  initDataProtectorSDK,
-} from '../externals/iexecSdkClient.ts';
-import { useUserStore } from '../stores/useUser.store.ts';
+import { cleanIExecSDKs, initIExecSDKs } from '../externals/iexecSdkClient.ts';
+import useUserStore from '../stores/useUser.store.ts';
 
 export function useWatchWagmiAccount() {
   const { connector, isConnected, status, address, chain } = useAccount();
-  const { setConnector, setInitialized, setConnected, setAddress } =
+  const { setConnector, setInitialized, setIsConnected, setAddress } =
     useUserStore();
   const queryClient = useQueryClient();
 
@@ -17,15 +14,15 @@ export function useWatchWagmiAccount() {
     // Update userStore
     setConnector(connector);
     setInitialized(status === 'connected' || status === 'disconnected');
-    setConnected(isConnected);
+    setIsConnected(isConnected);
     setAddress(address);
 
     // Update dataProtector client
     if (status === 'connected') {
-      initDataProtectorSDK({ connector });
+      initIExecSDKs({ connector });
       return;
     }
-    cleanDataProtectorSDK();
+    cleanIExecSDKs();
 
     queryClient.removeQueries();
   }, [connector, status, isConnected, address, chain]);

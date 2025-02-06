@@ -7,6 +7,8 @@ type UserState = {
   setConnector: (param: Connector | undefined) => void;
   isConnected: boolean;
   setIsConnected: (param: boolean) => void;
+  isInitialized: boolean;
+  setInitialized: (isInitialized: boolean) => void;
   address: Address | undefined;
   setAddress: (param: Address | undefined) => void;
   chainId: number | undefined;
@@ -18,6 +20,8 @@ const useUserStore = create<UserState>((set) => ({
   setConnector: (connector: Connector | undefined) => set({ connector }),
   isConnected: false,
   setIsConnected: (isConnected: boolean) => set({ isConnected }),
+  isInitialized: false,
+  setInitialized: (isInitialized) => set({ isInitialized }),
   address: undefined,
   setAddress: (address: Address | undefined) => {
     set({ address: address?.toLowerCase() as Address });
