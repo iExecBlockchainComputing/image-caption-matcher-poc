@@ -7,48 +7,33 @@ import '@fontsource/mulish/latin-600.css';
 import '@fontsource/mulish/latin-700.css';
 import '@fontsource/mulish/latin-800.css';
 import { QueryClientProvider } from '@tanstack/react-query';
-import { RouterProvider } from '@tanstack/react-router';
-import { Analytics } from '@vercel/analytics/react';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { WagmiConfig } from 'wagmi';
+import { WagmiProvider } from 'wagmi';
 import { ConditionalRollbarWrapper } from '@/components/ConditionalRollbarWrapper.tsx';
 import { initQueryClient } from '@/utils/initQueryClient.ts';
 import { initRollbarAlerting } from '@/utils/initRollbarAlerting.ts';
+import App from './App';
 import { Toaster } from './components/ui/toaster.tsx';
 import './index.css';
-import { initRouter } from './initRouter.ts';
-import { DisclaimerModal } from './modules/DisclaimerModal.tsx';
-import { wagmiConfig } from './utils/wagmiConfig.ts';
+import { wagmiAdapter } from './utils/wagmiConfig.ts';
 
 const { rollbar, rollbarConfig } = initRollbarAlerting();
 
 const queryClient = initQueryClient({ rollbar });
 
-const router = initRouter(queryClient);
-
-// Register the router instance for type safety
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router;
-  }
-}
-
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <WagmiConfig config={wagmiConfig}>
+    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
       <QueryClientProvider client={queryClient}>
-        <DisclaimerModal />
         <ConditionalRollbarWrapper
           rollbar={rollbar}
           rollbarConfig={rollbarConfig}
         >
-          <RouterProvider router={router} basepath={import.meta.env.BASE_URL} />
+          <App />
         </ConditionalRollbarWrapper>
       </QueryClientProvider>
-    </WagmiConfig>
-    <DisclaimerModal />
+    </WagmiProvider>
     <Toaster />
-    <Analytics />
   </React.StrictMode>
 );

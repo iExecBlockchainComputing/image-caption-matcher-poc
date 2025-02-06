@@ -51,7 +51,7 @@ export function CarouselScrollArrows({
         className="group p-1 transition-transform active:scale-[0.9]"
         onClick={() => scrollLeft(carousel)}
       >
-        <div className="rounded-full bg-grey-700 p-2 transition-colors group-hover:bg-grey-500/40">
+        <div className="bg-grey-700 group-hover:bg-grey-500/40 rounded-full p-2 transition-colors">
           <ArrowLeft size="18" />
         </div>
       </button>
@@ -59,7 +59,7 @@ export function CarouselScrollArrows({
         className="group p-1 transition-transform active:scale-[0.9] sm:ml-1"
         onClick={() => scrollRight(carousel)}
       >
-        <div className="rounded-full bg-grey-700 p-2 transition-colors group-hover:bg-grey-500/40">
+        <div className="bg-grey-700 group-hover:bg-grey-500/40 rounded-full p-2 transition-colors">
           <ArrowRight size="18" />
         </div>
       </button>

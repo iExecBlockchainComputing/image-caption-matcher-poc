@@ -1,38 +1,17 @@
 import '@fontsource/space-mono/400.css';
 import '@fontsource/space-mono/700.css';
-import { Link } from '@tanstack/react-router';
-import { useEffect } from 'react';
 import { LogOut } from 'react-feather';
-import useLocalStorageState from 'use-local-storage-state';
-import { useDevModeStore } from '@/stores/devMode.store.ts';
-import { useUserStore } from '@/stores/useUser.store.ts';
-import { LOCAL_STORAGE_PREFIX } from '@/utils/localStorage.ts';
+import { Link } from 'react-router-dom';
+import useUserStore from '@/stores/useUser.store.ts';
 import { cn } from '@/utils/style.utils.ts';
 import iExecLogo from '../../assets/iexec-logo.svg';
-import { AddressChip } from '../NavBar/AddressChip.tsx';
+import { useLoginLogout } from '../../hooks/useLoginLogout.ts';
 import { Button } from '../ui/button.tsx';
-import { Label } from '../ui/label.tsx';
-import { Switch } from '../ui/switch.tsx';
-import { useLoginLogout } from './useLoginLogout.ts';
+import { AddressChip } from './AddressChip.tsx';
 
 export function NavBar({ className }: { className?: string }) {
   const { isConnected, address } = useUserStore();
   const { login, logout } = useLoginLogout();
-  const [isStorageDevMode, setStorageDevMode] = useLocalStorageState(
-    `${LOCAL_STORAGE_PREFIX}_devMode`,
-    { defaultValue: false }
-  );
-  const { isDevMode, setDevMode } = useDevModeStore();
-
-  // Load value from localStorage
-  useEffect(() => {
-    setDevMode(isStorageDevMode);
-  }, []);
-
-  // Update localStorage value on change
-  useEffect(() => {
-    setStorageDevMode(isDevMode);
-  }, [isDevMode]);
 
   return (
     <header
@@ -101,17 +80,6 @@ export function NavBar({ className }: { className?: string }) {
             </button>
           </div>
           <div className="bg-grey-700 mx-4 hidden h-[36px] w-px md:block"></div>
-          <Label
-            htmlFor="dev-mode"
-            className="flex items-center space-x-2 py-2 md:py-1"
-          >
-            <Switch
-              id="dev-mode"
-              checked={isDevMode}
-              onCheckedChange={setDevMode}
-            />
-            <span className="whitespace-nowrap">Dev Mode</span>
-          </Label>
         </div>
       ) : (
         <div className="items-center">

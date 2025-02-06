@@ -6,8 +6,8 @@ export function Footer() {
 
   return (
     <div className="relative overflow-hidden pb-16">
-      <div className="relative z-10 mx-auto w-[93%] overflow-hidden rounded-3xl bg-gradient-to-r from-background via-[#2E2E3A] to-background px-0.5 pt-0.5 shadow-lg">
-        <div className="rounded-[23px] bg-background">
+      <div className="from-background to-background relative z-10 mx-auto w-[93%] overflow-hidden rounded-3xl bg-gradient-to-r via-[#2E2E3A] px-0.5 pt-0.5 shadow-lg">
+        <div className="bg-background rounded-[23px]">
           <div className="mx-auto grid w-[84%] max-w-6xl grid-cols-2 gap-8 gap-x-5 py-16 md:flex md:items-center">
             <div className="-order-1 text-xs xl:flex-1">
               © 2024 iExec. All rights reserved.

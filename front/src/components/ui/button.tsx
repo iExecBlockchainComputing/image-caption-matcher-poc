@@ -5,14 +5,14 @@ import { LoadingSpinner } from '@/components/LoadingSpinner.tsx';
 import { cn } from '@/utils/style.utils.ts';
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center rounded-30 text-sm font-medium ring-offset-background transition-colors duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'rounded-30 ring-offset-background focus-visible:ring-ring inline-flex items-center justify-center text-sm font-medium transition-colors duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {
         default:
-          'bg-primary text-primary-foreground hover:bg-grey-800 hover:text-white dark:hover:bg-grey-100 dark:hover:text-grey-800',
+          'bg-primary text-primary-foreground hover:bg-grey-800 dark:hover:bg-grey-100 dark:hover:text-grey-800 hover:text-white',
         outline:
-          'border border-grey-50 bg-background hover:bg-grey-800 hover:text-white',
+          'border-grey-50 bg-background hover:bg-grey-800 border hover:text-white',
         text: 'hover:bg-accent hover:text-accent-foreground',
       },
       size: {
@@ -66,7 +66,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {/*{isLoading && <Loader size="16" className="animate-spin-slower mr-2" />}*/}
-        {isLoading && <LoadingSpinner className="mr-2 animate-spin-slow" />}
+        {isLoading && <LoadingSpinner className="animate-spin-slow mr-2" />}
         {children}
       </Comp>
     );

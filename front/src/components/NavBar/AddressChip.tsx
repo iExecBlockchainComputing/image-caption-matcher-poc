@@ -24,13 +24,13 @@ export function AddressChip(props: AddressForNavBarProps) {
   return (
     <div
       className={cn(
-        'flex shrink-0 items-center rounded-[30px] bg-grey-800 px-3 py-2',
+        'bg-grey-800 flex shrink-0 items-center rounded-[30px] px-3 py-2',
         className
       )}
     >
-      <div className="text-sm font-medium text-primary">{displayAddress}</div>
+      <div className="text-primary text-sm font-medium">{displayAddress}</div>
       <button
-        className="-my-0.5 -mr-0.5 ml-1.5 shrink-0 bg-grey-800 px-0.5 py-0.5"
+        className="bg-grey-800 -my-0.5 -mr-0.5 ml-1.5 shrink-0 px-0.5 py-0.5"
         onClick={() => {
           navigator.clipboard.writeText(address.toLowerCase());
           toast({

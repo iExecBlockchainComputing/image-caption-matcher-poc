@@ -20,11 +20,11 @@ export function OneCollection({
 
       <DocLink className="mt-8">
         <div>
-          <span className="italic text-grey-400">Collection ID:</span>
+          <span className="text-grey-400 italic">Collection ID:</span>
           &nbsp;{Number(collection.id)}
         </div>
         <div>
-          <span className="italic text-grey-400">Created:</span>
+          <span className="text-grey-400 italic">Created:</span>
           &nbsp;{timestampToReadableDate(collection.creationTimestamp)}
         </div>
         <div>

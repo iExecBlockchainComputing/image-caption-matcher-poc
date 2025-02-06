@@ -1,5 +1,6 @@
-import { createWeb3Modal } from '@web3modal/wagmi/react';
-import { http, createConfig, CreateConnectorFn } from 'wagmi';
+import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
+import { createAppKit } from '@reown/appkit/react';
+import { http, CreateConnectorFn } from 'wagmi';
 import { injected, walletConnect } from 'wagmi/connectors';
 import { bellecour } from './bellecourChainConfig.ts';
 import { InjectedWalletProvider } from './injected-wallet-provider/injected-wallet-provider.ts';
@@ -16,9 +17,9 @@ export const projectId = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID!;
 
 // WalletConnect metadata
 const metadata = {
-  name: 'Content Creator demo dApp',
-  description: 'Content Creator demo dApp',
-  url: 'https://demo.iex.ec/content-creator',
+  name: 'Image Caption Matcher Poc',
+  description: 'Image Caption Matcher Poc',
+  url: '',
   icons: [
     'https://cdn.prod.website-files.com/6646148828eddb19c172bf2a/665db3ba85a625628c353a64_Logo-RLC-Yellow.png',
   ],
@@ -69,12 +70,13 @@ preservedAvailableProviderDetails.forEach((providerDetails) => {
   );
 });
 
-export const wagmiConfig = createConfig({
-  chains: [bellecour],
+export const wagmiAdapter = new WagmiAdapter({
+  networks: [bellecour],
   multiInjectedProviderDiscovery: false,
   transports: {
     [bellecour.id]: http(),
   },
+  projectId,
   connectors,
 });
 
@@ -88,10 +90,11 @@ const featuredWalletIds = [
 ];
 
 // Create modal
-createWeb3Modal({
-  wagmiConfig,
+createAppKit({
+  adapters: [wagmiAdapter],
+  networks: [bellecour],
   projectId,
-  defaultChain: bellecour,
+  defaultNetwork: bellecour,
   featuredWalletIds,
   allWallets: 'HIDE',
 });

@@ -2,17 +2,17 @@ import { Link } from '@tanstack/react-router';
 
 export function ProfileNavMenu() {
   return (
-    <div className="flex gap-x-12 border-b border-grey-700 pb-2">
+    <div className="border-grey-700 flex gap-x-12 border-b pb-2">
       <Link
         to={'/my-content'}
-        className="flex items-center gap-x-1.5 text-lg text-grey-400 transition-colors hover:text-white [&.active]:text-primary"
+        className="text-grey-400 [&.active]:text-primary flex items-center gap-x-1.5 text-lg transition-colors hover:text-white"
       >
         My content
       </Link>
 
       <Link
         to={'/settings'}
-        className="flex items-center gap-x-1.5 text-lg text-grey-400 transition-colors hover:text-white [&.active]:text-primary"
+        className="text-grey-400 [&.active]:text-primary flex items-center gap-x-1.5 text-lg transition-colors hover:text-white"
       >
         My settings
       </Link>

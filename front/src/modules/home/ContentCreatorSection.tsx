@@ -19,19 +19,19 @@ export function ContentCreatorSection({ className }: { className?: string }) {
         </h2>
       </div>
       <div className="flex flex-1 flex-col gap-y-6">
-        <div className="flex items-center gap-x-6 rounded-3xl border border-grey-700 px-6 py-5 sm:px-11 sm:py-10">
+        <div className="border-grey-700 flex items-center gap-x-6 rounded-3xl border px-6 py-5 sm:px-11 sm:py-10">
           <CheckCircle className="shrink-0" size="32" />
           <span className="text-lg">
             Choose monetization method (rent, subscription, sell)
           </span>
         </div>
-        <div className="flex items-center gap-x-6 rounded-3xl border border-grey-700 px-6 py-5 sm:px-11 sm:py-10">
+        <div className="border-grey-700 flex items-center gap-x-6 rounded-3xl border px-6 py-5 sm:px-11 sm:py-10">
           <DownloadCloud className="shrink-0" size="32" />
           <span className="text-lg">
             Upload your content (pdf, articles, code, graphic assets)
           </span>
         </div>
-        <div className="flex items-center gap-x-6 rounded-3xl border border-grey-700 px-6 py-5 sm:px-11 sm:py-10">
+        <div className="border-grey-700 flex items-center gap-x-6 rounded-3xl border px-6 py-5 sm:px-11 sm:py-10">
           <Key className="shrink-0" size="32" />
           <span className="text-lg">Manage ownership and profit</span>
         </div>

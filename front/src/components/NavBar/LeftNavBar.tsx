@@ -1,36 +1,16 @@
 import { Link } from '@tanstack/react-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Compass, FilePlus, LogOut, User, UserCheck } from 'react-feather';
-import useLocalStorageState from 'use-local-storage-state';
 import iExecLogo from '@/assets/iexec-logo.svg';
-import { AddressChip } from '@/components/NavBar/AddressChip.tsx';
-import { useLoginLogout } from '@/components/NavBar/useLoginLogout.ts';
-import { Label } from '@/components/ui/label.tsx';
-import { Switch } from '@/components/ui/switch.tsx';
-import { useDevModeStore } from '@/stores/devMode.store.ts';
-import { useUserStore } from '@/stores/useUser.store';
-import { LOCAL_STORAGE_PREFIX } from '@/utils/localStorage.ts';
+import { useLoginLogout } from '@/hooks/useLoginLogout';
+import useUserStore from '@/stores/useUser.store';
 import { cn } from '@/utils/style.utils';
+import { AddressChip } from './AddressChip';
 
 export function LeftNavBar({ className }: { className?: string }) {
   const { address } = useUserStore();
   const { logout } = useLoginLogout();
-  const [isStorageDevMode, setStorageDevMode] = useLocalStorageState(
-    `${LOCAL_STORAGE_PREFIX}_devMode`,
-    { defaultValue: false }
-  );
-  const { isDevMode, setDevMode } = useDevModeStore();
   const [isMenuOpen, setMenuOpen] = useState(false);
-
-  // Load value from localStorage
-  useEffect(() => {
-    setDevMode(isStorageDevMode);
-  }, []);
-
-  // Update localStorage value on change
-  useEffect(() => {
-    setStorageDevMode(isDevMode);
-  }, [isDevMode]);
 
   const handleMenuToggle = () => {
     setMenuOpen((prevState) => !prevState);
@@ -135,20 +115,6 @@ export function LeftNavBar({ className }: { className?: string }) {
           <User size="20" />
           Manage
         </Link>
-
-        <hr className="border-grey-800 mt-10" />
-
-        <Label
-          htmlFor="dev-mode"
-          className="mt-8 flex items-center space-x-2 py-1"
-        >
-          <Switch
-            id="dev-mode"
-            checked={isDevMode}
-            onCheckedChange={setDevMode}
-          />
-          <span>Dev Mode</span>
-        </Label>
       </div>
     </div>
   );

@@ -5,12 +5,8 @@ import useUserStore from '@/stores/useUser.store';
 
 export function useWatchWagmiAccount() {
   const { connector, status, address, chain } = useAccount();
-  const {
-    setConnector,
-    setIsConnected,
-    setAddress,
-    setChainId,
-  } = useUserStore();
+  const { setConnector, setIsConnected, setAddress, setChainId } =
+    useUserStore();
 
   useEffect(() => {
     // Update userStore
