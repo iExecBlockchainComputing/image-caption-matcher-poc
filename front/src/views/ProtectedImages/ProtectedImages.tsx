@@ -2,8 +2,28 @@ import { Plus } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ProtectedImageCard } from './ProtectedImageCard';
+import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import { useQuery } from '@tanstack/react-query';
+import useUserStore from '@/stores/useUser.store';
 
 export function ProtectedImages() {
+  const { address } = useUserStore();
+
+  const { isLoading, isError, error, data: protectedDatas } = useQuery({
+    queryKey: ['latestContent'],
+    queryFn: async () => {
+    const dataProtectorCore = await getDataProtectorCoreClient();
+      const protectedDatas = await dataProtectorCore.getProtectedData({
+        owner: address,
+        requiredSchema: {
+          targetImageCaptionMatcherPoc: 'bool',
+        },
+      });
+      console.log('protectedData', protectedDatas);
+      // Need to add the score to the protectedData
+      return protectedDatas;
+    },
+  });
   const images = [
     {
       id: '0x908ab1ca1fb0179253534d8b5f7777b8499b34f2',
