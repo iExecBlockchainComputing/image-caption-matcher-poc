@@ -1,9 +1,6 @@
-IMG_NAME=id
-IMG_FROM=${IMG_NAME}:non-tee
-IMG_TO=_username_/${IMG_NAME}:tee
-
-docker build . -t ${IMG_FROM}
-
+IMG_NAME=image-caption-matcher-dapp
+IMG_FROM=<YOUR-DOCKER-HUB-USERNAME>/${IMG_NAME}:1.0.0
+IMG_TO=<YOUR-DOCKER-HUB-USERNAME>/${IMG_NAME}:1.0.0
 docker run -it \
             -v /var/run/docker.sock:/var/run/docker.sock \
             registry.scontain.com/scone-production/iexec-sconify-image:5.7.6-v15 \
