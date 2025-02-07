@@ -35,6 +35,7 @@ export async function createProtectedData({
     },
     name: file.name,
     onStatusUpdate: (status) => {
+      console.log('createProtectedData status', status);
       keepInterestingStatusUpdates(onStatusUpdate, status);
     },
   });

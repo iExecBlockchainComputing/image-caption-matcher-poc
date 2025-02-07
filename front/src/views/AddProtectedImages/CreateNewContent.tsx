@@ -1,7 +1,8 @@
 import { WorkflowError } from '@iexec/dataprotector';
 import { ChangeEventHandler, FormEventHandler, useRef, useState } from 'react';
-import { UploadCloud, XCircle } from 'react-feather';
+import { CheckCircle, UploadCloud, XCircle } from 'react-feather';
 import { create } from 'zustand';
+import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { Stepper } from '@/components/Stepper';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
@@ -57,6 +58,7 @@ export function CreateNewContent() {
   const [file, setFile] = useState<File>();
   const [isLoading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
+  const [description, setDescription] = useState('');
 
   const inputTypeFileRef = useRef<HTMLInputElement>(null);
 
@@ -131,11 +133,29 @@ export function CreateNewContent() {
     inputTypeFileRef.current?.value && (inputTypeFileRef.current.value = '');
   }
 
+  const onSubmitDescriptionForm: FormEventHandler<HTMLFormElement> = async (
+    event
+  ) => {
+    event.preventDefault();
+
+    if (!description) {
+      toast({
+        variant: 'danger',
+        title: 'Please enter a description.',
+      });
+      return;
+    }
+
+    setLoading(true);
+    await handleDappExecutionStep();
+    setLoading(false);
+  };
+
   async function handleDappExecutionStep() {
     try {
       await executeDapp({
         protectedDataAddress: protectedDataAddress,
-        description: 'description',
+        description,
         onStatusUpdate: addOrUpdateStatusToStore,
       });
     } catch (err: unknown) {
@@ -158,7 +178,7 @@ export function CreateNewContent() {
         />
       </div>
       <div className="flex gap-x-8">
-        <div className="w-full">
+        <div className="w-full space-y-5">
           <form
             noValidate
             className="flex w-full flex-col items-center"
@@ -210,15 +230,46 @@ export function CreateNewContent() {
                 )}
               </div>
             </label>
-
-            <div className="mt-6 text-center">
-              <Button type="submit" isLoading={isLoading}>
-                Continue
-              </Button>
-              <div className="mt-2 text-xs">Expect it to take total ~1min</div>
-            </div>
-
-            {/* <div className="ml-1 mt-3 flex w-full max-w-[550px] flex-col gap-y-0.5 text-sm">
+            {currentStep === 0 && (
+              <div className="mt-6 text-center">
+                <Button type="submit" isLoading={isLoading}>
+                  Protect image
+                </Button>
+                <div className="mt-2 text-xs">
+                  Expect it to take total ~1min
+                </div>
+              </div>
+            )}
+          </form>
+          {currentStep === 1 && (
+            <form
+              onSubmit={onSubmitDescriptionForm}
+              className="mx-auto grid max-w-[550px] gap-5"
+            >
+              <h2 className="mx-auto font-sans text-2xl font-bold">
+                Describe your protected data
+              </h2>
+              <div className="space-y-1">
+                <label htmlFor="description">Description</label>
+                <textarea
+                  name="description"
+                  id="description"
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Short example of a description text"
+                  className="bg-grey-700 border-grey-600 w-full rounded-lg p-4"
+                />
+              </div>
+              <div className="mt-6 text-center">
+                <Button type="submit" isLoading={isLoading}>
+                  Validate description
+                </Button>
+                <div className="mt-2 text-xs">
+                  Expect it to take total ~5min
+                </div>
+              </div>
+            </form>
+          )}
+          <div className="ml-1 mt-3 flex w-full max-w-[550px] flex-col gap-y-0.5 text-sm">
             {Object.keys(statuses).length > 0 && (
               <div className="mt-6">
                 {Object.entries(statuses).map(
@@ -240,8 +291,7 @@ export function CreateNewContent() {
                 )}
               </div>
             )}
-          </div> */}
-          </form>
+          </div>
         </div>
       </div>
     </div>

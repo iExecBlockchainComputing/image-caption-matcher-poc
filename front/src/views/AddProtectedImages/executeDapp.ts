@@ -21,53 +21,36 @@ export async function executeDapp({
 }) {
   const dataProtectorCore = await getDataProtectorCoreClient();
 
-  onStatusUpdate({
-    title: 'Grant access to iDapp',
-    isDone: false,
-  });
-
   return await dataProtectorCore.processProtectedData({
     protectedData: protectedDataAddress,
     app: '0xc8c5e295d2beda01d1fb8dd4d85a1cb769185a34',
     workerpool: 'debug-v8-learn.main.pools.iexec.eth',
     args: description,
     onStatusUpdate: (status) => {
+      console.log('executeDapp status', status);
       keepInterestingStatusUpdates(onStatusUpdate, status);
     },
   });
 }
-
 function keepInterestingStatusUpdates(
   onStatusUpdate: GrantAccessStatusUpdateFn,
   status: OnStatusUpdateFn
 ) {
-  'FETCH_PROTECTED_DATA_ORDERBOOK';
-  'FETCH_APP_ORDERBOOK';
-  'FETCH_WORKERPOOL_ORDERBOOK';
-  'PUSH_REQUESTER_SECRET';
-  'REQUEST_TO_PROCESS_PROTECTED_DATA';
-  'CONSUME_TASK';
-  'CONSUME_RESULT_DOWNLOAD';
-  'CONSUME_RESULT_DECRYPT';
-  // TODO use these status to update the UI
+  const trackedStatuses = new Set([
+    'FETCH_PROTECTED_DATA_ORDERBOOK',
+    'FETCH_APP_ORDERBOOK',
+    'FETCH_WORKERPOOL_ORDERBOOK',
+    'PUSH_REQUESTER_SECRET',
+    'REQUEST_TO_PROCESS_PROTECTED_DATA',
+    'CONSUME_TASK',
+    'CONSUME_RESULT_DOWNLOAD',
+    'CONSUME_RESULT_DECRYPT',
+  ]);
 
-  if (status.title === 'CREATE_DATASET_ORDER' && status.isDone === true) {
+  if (trackedStatuses.has(status.title)) {
     onStatusUpdate({
-      title: 'Grant access to iDapp',
-      isDone: true,
-      // payload: status.payload,
-    });
-
-    onStatusUpdate({
-      title: 'PUBLISH_DATASET_ORDER',
-      isDone: false,
-    });
-  }
-
-  if (status.title === 'PUBLISH_DATASET_ORDER' && status.isDone === true) {
-    onStatusUpdate({
-      title: 'PUBLISH_DATASET_ORDER',
-      isDone: true,
+      title: status.title,
+      isDone: status.isDone ?? false,
     });
   }
 }
