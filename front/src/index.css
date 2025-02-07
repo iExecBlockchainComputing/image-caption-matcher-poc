@@ -3,6 +3,10 @@
 
 @theme {
   --color-*: initial;
+
+  --color-white: #ffffff;
+  --color-black: #000000;
+
   --color-yellow-50: #fefbf0;
   --color-yellow-100: #fcecc0;
   --color-yellow-200: #f9dd90;
