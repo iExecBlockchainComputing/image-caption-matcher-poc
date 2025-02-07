@@ -43,7 +43,7 @@ export function NavBar() {
               to={'/protected-images'}
               className={({ isActive }) =>
                 cn(
-                  'flex items-center gap-x-3 py-2 px-2 duration-200 hover:text-white md:py-3',
+                  'flex items-center gap-x-3 px-2 py-2 duration-200 hover:text-white md:py-3',
                   isActive ? 'text-yellow-500 underline underline-offset-4' : ''
                 )
               }

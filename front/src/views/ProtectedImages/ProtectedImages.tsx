@@ -1,18 +1,23 @@
+import { useQuery } from '@tanstack/react-query';
 import { Plus } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ProtectedImageCard } from './ProtectedImageCard';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
-import { useQuery } from '@tanstack/react-query';
 import useUserStore from '@/stores/useUser.store';
+import { ProtectedImageCard } from './ProtectedImageCard';
 
 export function ProtectedImages() {
   const { address } = useUserStore();
 
-  const { isLoading, isError, error, data: protectedDatas } = useQuery({
+  const {
+    isLoading,
+    isError,
+    error,
+    data: protectedDatas,
+  } = useQuery({
     queryKey: ['latestContent'],
     queryFn: async () => {
-    const dataProtectorCore = await getDataProtectorCoreClient();
+      const dataProtectorCore = await getDataProtectorCoreClient();
       const protectedDatas = await dataProtectorCore.getProtectedData({
         owner: address,
         requiredSchema: {

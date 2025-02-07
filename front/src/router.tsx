@@ -1,8 +1,8 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import MainLayout from './layouts/MainLayout.tsx';
+import { AddProtectedImages } from './views/AddProtectedImages/AddProtectedImages.tsx';
 import { Index } from './views/Index.tsx';
 import { ProtectedImages } from './views/ProtectedImages/ProtectedImages.tsx';
-import { AddProtectedImages } from './views/AddProtectedImages/AddProtectedImages.tsx';
 
 export const router = createBrowserRouter([
   {

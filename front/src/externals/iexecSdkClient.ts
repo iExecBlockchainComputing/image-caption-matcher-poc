@@ -1,4 +1,8 @@
-import { IExecDataProtector, IExecDataProtectorCore, IExecDataProtectorSharing } from '@iexec/dataprotector';
+import {
+  IExecDataProtector,
+  IExecDataProtectorCore,
+  IExecDataProtectorSharing,
+} from '@iexec/dataprotector';
 import { IExec, IExecConfig } from 'iexec';
 import { type Connector } from 'wagmi';
 
@@ -36,14 +40,11 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
     return;
   }
 
-  const dataProtectorParent = new IExecDataProtector(
-    provider,
-    { 
-      iexecOptions: { 
-        smsURL: 'https://sms.scone-debug.v8-bellecour.iex.ec/' 
-      }
-    }
-  );
+  const dataProtectorParent = new IExecDataProtector(provider, {
+    iexecOptions: {
+      smsURL: 'https://sms.scone-debug.v8-bellecour.iex.ec/',
+    },
+  });
 
   iExecDataProtectorCore = dataProtectorParent.core;
   iExecDataProtectorSharing = dataProtectorParent.sharing;

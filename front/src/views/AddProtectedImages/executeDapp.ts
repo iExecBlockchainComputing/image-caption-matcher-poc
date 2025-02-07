@@ -1,8 +1,7 @@
-import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
 import { Address } from '@/types';
-import {
-  OnStatusUpdateFn,
-} from '@iexec/dataprotector';
+import { OnStatusUpdateFn } from '@iexec/dataprotector';
+import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+
 export const PROTECTED_DATA_TARGET_KEY = 'targetImageCaptionMatcherPoc';
 
 type GrantAccessStatusUpdateFn = (params: {
@@ -27,22 +26,21 @@ export async function executeDapp({
     isDone: false,
   });
 
-  return await dataProtectorCore.processProtectedData({  
-    protectedData: protectedDataAddress,  
-    app: '0xc8c5e295d2beda01d1fb8dd4d85a1cb769185a34',  
-    workerpool: 'debug-v8-learn.main.pools.iexec.eth',  
+  return await dataProtectorCore.processProtectedData({
+    protectedData: protectedDataAddress,
+    app: '0xc8c5e295d2beda01d1fb8dd4d85a1cb769185a34',
+    workerpool: 'debug-v8-learn.main.pools.iexec.eth',
     args: description,
     onStatusUpdate: (status) => {
       keepInterestingStatusUpdates(onStatusUpdate, status);
     },
-  });  
+  });
 }
 
 function keepInterestingStatusUpdates(
   onStatusUpdate: GrantAccessStatusUpdateFn,
   status: OnStatusUpdateFn
 ) {
-
   'FETCH_PROTECTED_DATA_ORDERBOOK';
   'FETCH_APP_ORDERBOOK';
   'FETCH_WORKERPOOL_ORDERBOOK';

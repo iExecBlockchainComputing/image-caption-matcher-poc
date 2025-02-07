@@ -16,11 +16,11 @@ export function ProtectedImageCard({
 }) {
   const cardVisualBg = getCardVisualNumber({ address: id });
 
-  // run poco subgraph to find desc desc is arg of daps result 
+  // run poco subgraph to find desc desc is arg of daps result
 
   // run dataprotector core const completedTaskResult = await dataProtectorCore.getResultFromCompletedTask({
-//   taskId: '0x7ac398...',
-// });
+  //   taskId: '0x7ac398...',
+  // });
 
   return (
     <div className="bg-grey-900 border-grey-800 flex flex-col overflow-hidden rounded-3xl border">

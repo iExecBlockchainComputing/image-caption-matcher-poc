@@ -12,7 +12,7 @@ export const Stepper: React.FC<StepperProps> = ({ currentStep, steps }) => {
 
   return (
     <div
-      className="grid place-items-center mx-auto gap-y-4"
+      className="mx-auto grid place-items-center gap-y-4"
       style={{
         gridTemplateColumns: `repeat(${stepsNb}, minmax(0, 1fr))`,
         maxWidth: stepsNb * 350,

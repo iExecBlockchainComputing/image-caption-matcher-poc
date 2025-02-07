@@ -1,8 +1,9 @@
-import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
 import {
   createArrayBufferFromFile,
   type OneProtectDataStatus,
 } from '@iexec/dataprotector';
+import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+
 export const PROTECTED_DATA_TARGET_KEY = 'targetImageCaptionMatcherPoc';
 
 type CreateProtectedDataStatusUpdateFn = (params: {
@@ -18,7 +19,6 @@ export async function createProtectedData({
   file: File;
   onStatusUpdate: CreateProtectedDataStatusUpdateFn;
 }) {
-
   const dataProtectorCore = await getDataProtectorCoreClient();
 
   const fileAsArrayBuffer = await createArrayBufferFromFile(file);
@@ -29,9 +29,9 @@ export async function createProtectedData({
   });
 
   return dataProtectorCore.protectData({
-    data: { 
+    data: {
       image: fileAsArrayBuffer,
-      targetImageCaptionMatcherPoc: true, 
+      targetImageCaptionMatcherPoc: true,
     },
     name: file.name,
     onStatusUpdate: (status) => {

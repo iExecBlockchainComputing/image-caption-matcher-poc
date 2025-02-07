@@ -1,8 +1,7 @@
-import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
 import { Address } from '@/types';
-import {
-  OnStatusUpdateFn,
-} from '@iexec/dataprotector';
+import { OnStatusUpdateFn } from '@iexec/dataprotector';
+import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+
 export const PROTECTED_DATA_TARGET_KEY = 'targetImageCaptionMatcherPoc';
 
 type GrantAccessStatusUpdateFn = (params: {
