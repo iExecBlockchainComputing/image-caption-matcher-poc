@@ -1,6 +1,7 @@
 import { WorkflowError } from '@iexec/dataprotector';
 import { ChangeEventHandler, FormEventHandler, useRef, useState } from 'react';
 import { CheckCircle, UploadCloud, XCircle } from 'react-feather';
+import { useNavigate } from 'react-router-dom';
 import { create } from 'zustand';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { Stepper } from '@/components/Stepper';
@@ -35,19 +36,21 @@ type StatusState = {
 const useStatusStore = create<StatusState>((set) => ({
   statuses: {},
   addOrUpdateStatusToStore: (status) =>
-    set((state) => {
-      const updatedStatuses = { ...state.statuses };
-      updatedStatuses[status.title] = {
-        isDone: status.isDone,
-        isError: status.isError || false,
-        payload: status.payload,
-      };
-      return { statuses: updatedStatuses };
-    }),
+    set((state) => ({
+      statuses: {
+        ...state.statuses,
+        [status.title]: {
+          isDone: status.isDone,
+          isError: status.isError ?? false,
+          payload: status.payload,
+        },
+      },
+    })),
   resetStatuses: () => set({ statuses: {} }),
 }));
 
 export function CreateNewContent() {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const { statuses, addOrUpdateStatusToStore, resetStatuses } =
     useStatusStore();
@@ -61,6 +64,14 @@ export function CreateNewContent() {
   const [description, setDescription] = useState('');
 
   const inputTypeFileRef = useRef<HTMLInputElement>(null);
+
+  function handleError(err: unknown) {
+    if (err instanceof WorkflowError) {
+      console.error(`[Upload new content] ERROR ${err.cause}`, err);
+    } else {
+      console.error('[Upload new content] ERROR', err, err.data && err.data);
+    }
+  }
 
   const onFileSelected: ChangeEventHandler<HTMLInputElement> = (event) => {
     event.preventDefault();
@@ -94,15 +105,12 @@ export function CreateNewContent() {
       });
       return;
     }
-
-    setLoading(true);
     await handleUploadImageStep();
-    setLoading(false);
   };
 
   async function handleUploadImageStep() {
     resetStatuses();
-
+    setLoading(true);
     try {
       const { address: protectedDataAddress } = await createProtectedData({
         file: file!,
@@ -110,20 +118,17 @@ export function CreateNewContent() {
       });
       setProtectedDataAddress(protectedDataAddress);
       await grantAccessProtectedData({
-        protectedDataAddress: protectedDataAddress,
-        userAddress: userAddress,
+        protectedDataAddress,
+        userAddress,
         onStatusUpdate: addOrUpdateStatusToStore,
       });
       setCurrentStep(1);
-      // resetUploadForm();
     } catch (err: unknown) {
       resetStatuses();
-
-      if (err instanceof WorkflowError) {
-        console.error(`[Upload new content] ERROR ${err.cause}`, err);
-        return;
-      }
-      console.error('[Upload new content] ERROR', err, err.data && err.data);
+      handleError(err);
+    } finally {
+      setLoading(false);
+      resetStatuses();
     }
   }
 
@@ -152,6 +157,8 @@ export function CreateNewContent() {
   };
 
   async function handleDappExecutionStep() {
+    resetStatuses();
+    setLoading(true);
     try {
       await executeDapp({
         protectedDataAddress: protectedDataAddress,
@@ -160,12 +167,10 @@ export function CreateNewContent() {
       });
     } catch (err: unknown) {
       resetStatuses();
-
-      if (err instanceof WorkflowError) {
-        console.error(`[Upload new content] ERROR ${err.cause}`, err);
-        return;
-      }
-      console.error('[Upload new content] ERROR', err, err.data && err.data);
+      handleError(err);
+    } finally {
+      setLoading(false);
+      navigate('/protected-images');
     }
   }
 
