@@ -12,7 +12,7 @@ export function NavBar() {
   };
 
   return (
-    <div className="group relative z-30 h-full flex-none lg:w-[240px]">
+    <div className="group relative z-30 h-full flex-none lg:w-[255px]">
       <label
         className="group/checkbox fixed right-7 top-7 z-30 flex size-5 w-[26px] origin-center transform flex-col justify-between lg:hidden"
         htmlFor="menu"
@@ -30,22 +30,20 @@ export function NavBar() {
         <span className="pointer-events-none block h-0.5 w-[26px] origin-top-right transform rounded-full bg-white duration-200 group-has-[:checked]/checkbox:scale-x-0"></span>
         <span className="pointer-events-none block h-0.5 w-[26px] origin-right transform rounded-full bg-white duration-200 group-has-[:checked]/checkbox:rotate-45"></span>
       </label>
-      <div className="border-grey-600 bg-grey-900 fixed h-dvh w-full -translate-x-full overflow-auto flex flex-col rounded-r-3xl border-r px-5 pt-10 duration-300 group-has-[:checked]:translate-x-0 lg:w-[240px] lg:translate-x-0">
+      <div className="border-grey-600 bg-grey-900 fixed flex h-dvh w-full -translate-x-full flex-col overflow-auto rounded-r-3xl border-r px-5 pt-10 duration-300 group-has-[:checked]:translate-x-0 lg:w-[255px] lg:translate-x-0">
         <Link to="/" className="-mx-2 flex items-center p-2">
           <img src={iExecLogo} width="25" height="30" alt="iExec logo" />
 
-          <div className="ml-3 font-mono font-bold leading-5">
-            iExec
-          </div>
+          <div className="ml-3 font-mono font-bold leading-5">iExec</div>
         </Link>
 
-        <div className="left-navbar text-grey-400 mt-10 grow flex flex-col">
+        <div className="left-navbar text-grey-400 mt-10 flex grow flex-col">
           <div className="mt-0.5 grow">
             <NavLink
-              to={'/earnings'}
+              to={'/protected-images'}
               className={({ isActive }) =>
                 cn(
-                  'flex items-center gap-x-3 py-2 pl-5 pr-2 duration-200 hover:text-white md:py-3',
+                  'flex items-center gap-x-3 py-2 px-2 duration-200 hover:text-white md:py-3',
                   isActive ? 'text-yellow-500 underline underline-offset-4' : ''
                 )
               }

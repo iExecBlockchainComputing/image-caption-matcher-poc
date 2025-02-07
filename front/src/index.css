@@ -142,6 +142,10 @@ body {
   @apply bg-background text-foreground;
 }
 
+h1 {
+  @apply font-anybody text-2xl font-extrabold;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

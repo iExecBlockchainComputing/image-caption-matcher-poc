@@ -9,7 +9,7 @@ export default function ConnectWallet() {
     <div className="mt-[94px]">
       <div className="border-lightgrey relative overflow-hidden rounded-3xl border border-[#303039] bg-[#14141B] px-10 py-[78px] text-center">
         <div className="relative z-10">
-          <h1 className="mx-auto max-w-[725px] text-3xl font-extrabold">
+          <h1 className="mx-auto max-w-[725px] text-3xl">
             Connect your wallet to access the Image Caption Matcher Poc.
           </h1>
           <div className="mt-7">
