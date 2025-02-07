@@ -5,11 +5,11 @@ import { create } from 'zustand';
 import { Stepper } from '@/components/Stepper';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
-import { createProtectedData } from '@/modules/createNew/createProtectedData';
 import useUserStore from '@/stores/useUser.store';
 import './CreateNewContent.css';
-import { grantAccessProtectedData } from './grantAccessProtectedData';
+import { createProtectedData } from './createProtectedData';
 import { executeDapp } from './executeDapp';
+import { grantAccessProtectedData } from './grantAccessProtectedData';
 
 // const FILE_SIZE_LIMIT_IN_KB = 500;
 const FILE_SIZE_LIMIT_IN_KB = 10_000;
@@ -56,7 +56,7 @@ export function CreateNewContent() {
   const [fileName, setFileName] = useState('');
   const [file, setFile] = useState<File>();
   const [isLoading, setLoading] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0)
+  const [currentStep, setCurrentStep] = useState(0);
 
   const inputTypeFileRef = useRef<HTMLInputElement>(null);
 
@@ -112,7 +112,7 @@ export function CreateNewContent() {
         userAddress: userAddress,
         onStatusUpdate: addOrUpdateStatusToStore,
       });
-      setCurrentStep(1)
+      setCurrentStep(1);
       // resetUploadForm();
     } catch (err: unknown) {
       resetStatuses();
@@ -135,7 +135,7 @@ export function CreateNewContent() {
     try {
       await executeDapp({
         protectedDataAddress: protectedDataAddress,
-        description: "description",
+        description: 'description',
         onStatusUpdate: addOrUpdateStatusToStore,
       });
     } catch (err: unknown) {
@@ -148,7 +148,6 @@ export function CreateNewContent() {
       console.error('[Upload new content] ERROR', err, err.data && err.data);
     }
   }
-
 
   return (
     <div className="grid gap-10">
