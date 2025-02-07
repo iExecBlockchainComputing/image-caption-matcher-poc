@@ -5,16 +5,11 @@ import { getCardVisualNumber } from '@/utils/getCardVisualNumber';
 import { truncateAddress } from '@/utils/truncateAddress';
 import styles from './CardBackground.module.css';
 
-export function ProtectedImageCard({
-  id,
-  description,
-  score,
-}: {
-  id: Address;
-  description: string;
-  score: number;
-}) {
-  const cardVisualBg = getCardVisualNumber({ address: id });
+export function ProtectedImageCard({ address }: { address: Address }) {
+  const cardVisualBg = getCardVisualNumber({ address });
+  const score = 80;
+  const description =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.';
 
   // run poco subgraph to find desc desc is arg of daps result
 
@@ -32,7 +27,7 @@ export function ProtectedImageCard({
       />
       <div className="flex flex-col items-center space-y-4 px-4 py-6">
         <div className="flex w-full items-center justify-between gap-2">
-          <span className="text-grey-400">{truncateAddress(id)}</span>
+          <span className="text-grey-400">{truncateAddress(address)}</span>
           <Button
             variant="chip"
             size="sm"
