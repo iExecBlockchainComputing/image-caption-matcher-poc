@@ -65,7 +65,7 @@ export function NavBar() {
                   fill="currentColor"
                 />
               </svg>
-              <span>Earnings</span>
+              <span>My Protected images</span>
             </NavLink>
           </div>
 
