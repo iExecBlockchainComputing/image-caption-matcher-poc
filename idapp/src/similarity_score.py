@@ -3,22 +3,24 @@ from utils import loadModelAndProcessor, loadImage, forward
 import tensorflow as tf
 from PIL import Image
 
-def getScore(outputs): 
+def getScore(outputs):
     """
     Get the similarity score of the image and the provided description.
-    
-    Args: 
+
+    Args:
         outputs: Model outputs containing similarity scores.
-    
+
     Returns:
         int: The similarity score (1-100).
     """
-    softmax = np.exp(outputs.itm_score) / np.sum(np.exp(outputs.itm_score))
-    score = int(softmax[0][1] * 100)
+    raw_score = outputs.itm_score[0][1]
+    sigmoid_score = 1 / (1 + np.exp(-raw_score))
+    score = int(sigmoid_score * 100)
+
     print("Similarity Score:", score)
     return score
 
-def SimilarityScore(image_input, provided_description, cache_dir): 
+def SimilarityScore(image_input, provided_description, cache_dir):
     """
     Computes the similarity score between an image and a provided description.
 
@@ -33,9 +35,9 @@ def SimilarityScore(image_input, provided_description, cache_dir):
     model, processor = loadModelAndProcessor(cache_dir)
 
     if isinstance(image_input, str):
-        raw_image = loadImage(image_input)  
+        raw_image = loadImage(image_input)
     elif isinstance(image_input, Image.Image):
-        raw_image = image_input  
+        raw_image = image_input
     else:
         raise ValueError("Invalid image input type. Expected file path or PIL Image.")
 
