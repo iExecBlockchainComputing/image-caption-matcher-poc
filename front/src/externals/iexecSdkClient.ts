@@ -1,13 +1,18 @@
-import { IExecDataProtectorCore } from '@iexec/dataprotector';
+import { IExecDataProtector, IExecDataProtectorCore, IExecDataProtectorSharing } from '@iexec/dataprotector';
 import { IExec, IExecConfig } from 'iexec';
 import { type Connector } from 'wagmi';
 
 let iExecDataProtectorCore: IExecDataProtectorCore | null = null;
+let iExecDataProtectorSharing: IExecDataProtectorSharing | null = null;
 let iExec: IExec | null = null;
 
 // Basic promise queue for pending getDataProtectorCoreClient() requests
 const DATA_PROTECTOR_CORE_CLIENT_RESOLVES: Array<
   Promise<IExecDataProtectorCore>
+> = [];
+// Basic promise queue for pending getDataProtectorCoreClient() requests
+const DATA_PROTECTOR_SHARING_CLIENT_RESOLVES: Array<
+  Promise<IExecDataProtectorSharing>
 > = [];
 // Basic promise queue for pending getIExec() requests
 const IEXEC_CLIENT_RESOLVES: Array<Promise<IExec>> = [];
@@ -15,6 +20,7 @@ const IEXEC_CLIENT_RESOLVES: Array<Promise<IExec>> = [];
 // Clean both SDKs
 export function cleanIExecSDKs() {
   iExecDataProtectorCore = null;
+  iExecDataProtectorSharing = null;
   iExec = null;
 }
 
@@ -30,8 +36,17 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
     return;
   }
 
-  // Initialize IExecDataProtectorCore
-  iExecDataProtectorCore = new IExecDataProtectorCore(provider);
+  const dataProtectorParent = new IExecDataProtector(
+    provider,
+    { 
+      iexecOptions: { 
+        smsURL: 'https://sms.scone-debug.v8-bellecour.iex.ec/' 
+      }
+    }
+  );
+
+  iExecDataProtectorCore = dataProtectorParent.core;
+  iExecDataProtectorSharing = dataProtectorParent.sharing;
 
   // Initialize
   const config = new IExecConfig({ ethProvider: provider });
@@ -41,6 +56,11 @@ export async function initIExecSDKs({ connector }: { connector?: Connector }) {
     return resolve(iExecDataProtectorCore);
   });
   DATA_PROTECTOR_CORE_CLIENT_RESOLVES.length = 0;
+
+  DATA_PROTECTOR_SHARING_CLIENT_RESOLVES.forEach((resolve) => {
+    return resolve(iExecDataProtectorSharing);
+  });
+  DATA_PROTECTOR_SHARING_CLIENT_RESOLVES.length = 0;
 
   IEXEC_CLIENT_RESOLVES.forEach((resolve) => {
     return resolve(iExec);
@@ -55,6 +75,15 @@ export async function getDataProtectorCoreClient(): Promise<IExecDataProtectorCo
     );
   }
   return iExecDataProtectorCore;
+}
+
+export async function getDataProtectorSharingClient(): Promise<IExecDataProtectorSharing> {
+  if (!iExecDataProtectorSharing) {
+    return new Promise((resolve) =>
+      DATA_PROTECTOR_SHARING_CLIENT_RESOLVES.push(resolve)
+    );
+  }
+  return iExecDataProtectorSharing;
 }
 
 export function getIExec(): Promise<IExec> {
