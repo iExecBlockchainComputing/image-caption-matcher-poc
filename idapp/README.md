@@ -66,7 +66,7 @@ Follow the iExec guide for setting up a local dApp:
    ```sh  
    docker build . -t yourdockerhubusername/image-caption-matcher:non-tee  
    docker push yourdockerhubusername/image-caption-matcher:non-tee  
-    ```
+```
 2️⃣ **Sconify the Image** (Make it SGX-Enabled)  
 
    Modify the first three lines in `sconify.sh` to match your DockerHub username:  
