@@ -1,21 +1,45 @@
 import { Address } from '@/types';
+import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import { Button } from '@/components/ui/button';
+import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
 import { getCardVisualNumber } from '@/utils/getCardVisualNumber';
 import { truncateAddress } from '@/utils/truncateAddress';
 import styles from './CardBackground.module.css';
 
-export function ProtectedImageCard({ address }: { address: Address }) {
+export function ProtectedImageCard({
+  address,
+  description,
+  taskId,
+}: {
+  address: Address;
+  description: string;
+  taskId: string;
+}) {
   const cardVisualBg = getCardVisualNumber({ address });
-  const score = 80;
-  const description =
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.';
 
-  // run poco subgraph to find desc desc is arg of daps result
+  const { data: taskScore } = useQuery({
+    queryKey: ['getScore', taskId],
+    queryFn: async () => {
+      console.log('taskId', taskId);
 
-  // run dataprotector core const completedTaskResult = await dataProtectorCore.getResultFromCompletedTask({
-  //   taskId: '0x7ac398...',
-  // });
+      const dataProtectorCore = await getDataProtectorCoreClient();
+      const { result: taskResult } =
+        await dataProtectorCore.getResultFromCompletedTask({
+          taskId,
+          path: 'result.txt',
+        });
+      if (!taskResult) {
+        return;
+      }
+
+      const decoder = new TextDecoder('utf-8');
+      const taskScore = decoder.decode(taskResult);
+
+      return Number(taskScore);
+    },
+    enabled: !!taskId,
+  });
 
   return (
     <div className="bg-grey-900 border-grey-800 flex flex-col overflow-hidden rounded-3xl border">
@@ -32,20 +56,24 @@ export function ProtectedImageCard({ address }: { address: Address }) {
             variant="chip"
             size="sm"
             className={
-              score <= 35
-                ? 'before:bg-danger-foreground'
-                : score <= 75
-                  ? 'before:bg-warning-foreground'
-                  : 'before:bg-success-foreground'
+              taskScore === undefined
+                ? 'before:bg-default-foreground'
+                : taskScore <= 35
+                  ? 'before:bg-danger-foreground'
+                  : taskScore <= 75
+                    ? 'before:bg-warning-foreground'
+                    : 'before:bg-success-foreground'
             }
           >
-            {score}
+            {taskScore != null ? taskScore : '...'}
           </Button>
         </div>
-        <div className="space-y-2.5">
-          <h2>Description</h2>
-          <p className="text-grey-500">{description}</p>
-        </div>
+        {description && (
+          <div className="w-full space-y-2.5">
+            <h2>Description</h2>
+            <p className="text-grey-500">{description}</p>
+          </div>
+        )}
         <Button className="mx-auto" variant="outline" size="sm">
           Edit
         </Button>

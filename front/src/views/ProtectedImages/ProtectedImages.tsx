@@ -23,19 +23,19 @@ export function ProtectedImages() {
       console.log('apps', apps);
 
       const app = apps[0];
-      const appUsages = app?.usages.map((usage) => ({
-        datasetId: usage.dataset?.id,
-        taskId: usage.tasks[0].id,
-        params: usage.params,
-        iexecArgs: JSON.parse(usage.params)?.iexec_args ?? null,
-      }));
+      const appUsages =
+        app?.usages.map((usage) => ({
+          datasetId: usage.dataset?.id,
+          taskId: usage.tasks[0].id,
+          params: usage.params,
+          iexecArgs: JSON.parse(usage.params)?.iexec_args ?? null,
+        })) ?? [];
 
-      console.log('appUsages', appUsages);
+      // console.log('appUsages', appUsages);
       return appUsages;
     },
     enabled: !!userAddress,
   });
-  console.log('appUsages', appUsages);
 
   const { data: protectedDatas } = useQuery({
     queryKey: ['protectedDatas'],
@@ -47,11 +47,32 @@ export function ProtectedImages() {
           targetImageCaptionMatcherPoc: 'bool',
         },
       });
-      console.log('protectedData', protectedDatas);
+
+      // console.log('protectedData', protectedDatas);
       // Need to add the score to the protectedData
       return protectedDatas;
     },
   });
+
+  // Associer les usages aux protectedDatas
+  const enrichedProtectedDatas =
+    protectedDatas?.map((protectedData) => {
+      const associatedUsages =
+        appUsages?.filter(
+          (usage) => usage.datasetId === protectedData.address
+        ) ?? [];
+
+      const firstUsage =
+        associatedUsages.length > 0 ? associatedUsages[0] : null;
+
+      return {
+        ...protectedData,
+        taskId: firstUsage?.taskId ?? null,
+        description: firstUsage?.iexecArgs ?? null,
+      };
+    }) ?? [];
+
+  // console.log('enrichedProtectedDatas', enrichedProtectedDatas);
 
   return (
     <div className="grid gap-10">
@@ -76,10 +97,12 @@ export function ProtectedImages() {
           </div>
         ) : (
           <div className="grid grid-cols-[repeat(auto-fill,_minmax(330px,_1fr))] gap-5">
-            {protectedDatas.map((protectedData) => (
+            {enrichedProtectedDatas.map((protectedData) => (
               <ProtectedImageCard
                 key={protectedData.address}
                 address={protectedData.address}
+                description={protectedData.description}
+                taskId={protectedData.taskId}
               />
             ))}
           </div>
