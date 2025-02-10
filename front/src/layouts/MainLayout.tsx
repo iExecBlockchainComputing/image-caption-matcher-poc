@@ -2,9 +2,9 @@ import { Outlet } from 'react-router-dom';
 import { NavBar } from '@/components/NavBar/NavBar.tsx';
 import { TopNavBar } from '@/components/NavBar/TopNavBar.tsx';
 import { useWatchAccount } from '@/hooks/useWatchAccount.ts';
-import ConnectWallet from '@/modules/ConnectWallet.tsx';
 import useUserStore from '@/stores/useUser.store.ts';
 import { Toaster } from '../components/ui/toaster.tsx';
+import ConnectWallet from './ConnectWallet.tsx';
 
 export default function MainLayout() {
   useWatchAccount();
