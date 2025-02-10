@@ -27,7 +27,6 @@ export async function executeDapp({
     workerpool: 'debug-v8-learn.main.pools.iexec.eth',
     args: description,
     onStatusUpdate: (status) => {
-      console.log('executeDapp status', status);
       keepInterestingStatusUpdates(onStatusUpdate, status);
     },
   });

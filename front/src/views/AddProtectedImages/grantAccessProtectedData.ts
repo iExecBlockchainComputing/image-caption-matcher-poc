@@ -32,7 +32,6 @@ export async function grantAccessProtectedData({
     authorizedApp: '0xc8c5e295d2beda01d1fb8dd4d85a1cb769185a34',
     numberOfAccess: 100,
     onStatusUpdate: (status) => {
-      console.log('grantAccessProtectedData status', status);
       keepInterestingStatusUpdates(onStatusUpdate, status);
     },
   });
@@ -46,7 +45,6 @@ function keepInterestingStatusUpdates(
     onStatusUpdate({
       title: 'Grant access to iDapp',
       isDone: true,
-      // payload: status.payload,
     });
 
     onStatusUpdate({

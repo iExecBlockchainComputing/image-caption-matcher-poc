@@ -13,7 +13,6 @@ import { createProtectedData } from './createProtectedData';
 import { executeDapp } from './executeDapp';
 import { grantAccessProtectedData } from './grantAccessProtectedData';
 
-// const FILE_SIZE_LIMIT_IN_KB = 500;
 const FILE_SIZE_LIMIT_IN_KB = 10_000;
 
 // TODO move that to store folder

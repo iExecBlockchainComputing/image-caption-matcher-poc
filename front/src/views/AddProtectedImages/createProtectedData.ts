@@ -35,7 +35,6 @@ export async function createProtectedData({
     },
     name: file.name,
     onStatusUpdate: (status) => {
-      console.log('createProtectedData status', status);
       keepInterestingStatusUpdates(onStatusUpdate, status);
     },
   });
@@ -49,7 +48,6 @@ function keepInterestingStatusUpdates(
     onStatusUpdate({
       title: 'Create protected data into DataProtector registry smart-contract',
       isDone: true,
-      // payload: status.payload,
     });
 
     onStatusUpdate({

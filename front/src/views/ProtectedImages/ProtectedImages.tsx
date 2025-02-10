@@ -20,7 +20,6 @@ export function ProtectedImages() {
         appAddress: '0xc8c5e295d2beda01d1fb8dd4d85a1cb769185a34',
         userAddress,
       });
-      console.log('apps', apps);
 
       const app = apps[0];
       const appUsages =
@@ -31,7 +30,6 @@ export function ProtectedImages() {
           iexecArgs: JSON.parse(usage.params)?.iexec_args ?? null,
         })) ?? [];
 
-      // console.log('appUsages', appUsages);
       return appUsages;
     },
     enabled: !!userAddress,
@@ -48,13 +46,10 @@ export function ProtectedImages() {
         },
       });
 
-      // console.log('protectedData', protectedDatas);
-      // Need to add the score to the protectedData
       return protectedDatas;
     },
   });
 
-  // Associer les usages aux protectedDatas
   const enrichedProtectedDatas =
     protectedDatas?.map((protectedData) => {
       const associatedUsages =
@@ -71,8 +66,6 @@ export function ProtectedImages() {
         description: firstUsage?.iexecArgs ?? null,
       };
     }) ?? [];
-
-  // console.log('enrichedProtectedDatas', enrichedProtectedDatas);
 
   return (
     <div className="grid gap-10">

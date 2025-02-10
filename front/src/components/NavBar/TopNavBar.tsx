@@ -3,8 +3,6 @@ import { useLoginLogout } from '@/hooks/useLoginLogout';
 import useUserStore from '@/stores/useUser.store';
 import { AddressChip } from './AddressChip';
 
-// import { Imitate } from './NavBar/Imitate.tsx';
-
 export function TopNavBar() {
   const { isConnected, address } = useUserStore();
   const { logout } = useLoginLogout();

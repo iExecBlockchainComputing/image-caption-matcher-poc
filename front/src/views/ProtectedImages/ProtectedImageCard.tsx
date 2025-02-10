@@ -21,8 +21,6 @@ export function ProtectedImageCard({
   const { data: taskScore } = useQuery({
     queryKey: ['getScore', taskId],
     queryFn: async () => {
-      console.log('taskId', taskId);
-
       const dataProtectorCore = await getDataProtectorCoreClient();
       const { result: taskResult } =
         await dataProtectorCore.getResultFromCompletedTask({
