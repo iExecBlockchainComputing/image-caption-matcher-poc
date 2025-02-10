@@ -15,7 +15,7 @@ const config: CodegenConfig = {
         },
       },
     },
-    './src/npm gql/graphql.schema.json': {
+    './src/gql/graphql.schema.json': {
       plugins: ['introspection'],
     },
   },
