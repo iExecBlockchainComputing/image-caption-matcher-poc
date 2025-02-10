@@ -21,6 +21,9 @@ export async function getAppUsages({
               id
             }
             params
+            dataset {
+              id
+            }
           }
         }
       }
