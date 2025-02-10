@@ -1,9 +1,9 @@
 import { clsx } from 'clsx';
-import avatarStyles from '@/modules/profile/profile.module.css';
 import { getAvatarVisualNumber } from '@/utils/getAvatarVisualNumber.ts';
 import { cn } from '@/utils/style.utils.ts';
 import { truncateAddress } from '@/utils/truncateAddress.ts';
 import { useToast } from '../ui/use-toast.ts';
+import avatarStyles from './profile.module.css';
 
 type AddressForNavBarProps = {
   address: string;
