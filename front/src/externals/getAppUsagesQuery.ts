@@ -1,13 +1,13 @@
-import { request } from 'graphql-request';
-import { Address } from 'viem';
 import { App } from '@/gql/graphql.ts';
+import { request } from 'graphql-request';
 import { gql } from 'graphql-tag';
+import { Address } from 'viem';
 
 export type AppForClient = App;
 
 export async function getAppUsages({
   appAddress,
-  userAddress
+  userAddress,
 }: {
   appAddress: Address;
   userAddress: Address;

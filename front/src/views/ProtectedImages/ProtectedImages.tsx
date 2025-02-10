@@ -45,9 +45,11 @@ export function ProtectedImages() {
       </div>
       <div className="">
         {!protectedDatas || protectedDatas.length === 0 ? (
-          <div className="bg-grey-700 grid gap-10 py-10">
+          <div className="bg-grey-700 grid items-center justify-center gap-10 rounded-3xl py-10">
             No protected images yet
-            <Button>Protect new image</Button>
+            <Button asChild>
+              <Link to="/protected-images/new">Protect new image</Link>
+            </Button>
           </div>
         ) : (
           <div className="grid grid-cols-[repeat(auto-fill,_minmax(330px,_1fr))] gap-5">
