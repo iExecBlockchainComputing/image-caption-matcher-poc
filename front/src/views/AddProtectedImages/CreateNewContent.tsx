@@ -201,11 +201,11 @@ export function CreateNewContent() {
                 </span>
                 {!fileName && (
                   <>
-                    <span className="pointer-events-none mt-8 text-xs">
+                    {/* <span className="pointer-events-none mt-8 text-xs">
                       Drag and drop a file here
-                    </span>
+                    </span> */}
                     <span className="text-grey-400 pointer-events-none mt-3 text-xs">
-                      JPG, PNG or PDF, file size no more than{' '}
+                      JPG or PNG, file size no more than{' '}
                       {FILE_SIZE_LIMIT_IN_KB / 1000} Mb
                     </span>
                   </>
