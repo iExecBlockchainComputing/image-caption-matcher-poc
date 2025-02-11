@@ -61,7 +61,7 @@ export function CreateNewContent() {
   const [description, setDescription] = useState('');
 
   const { data: appUsages } = useQuery({
-    queryKey: ['appUsage'],
+    queryKey: ['appUsage', protectedDataAddress],
     queryFn: async () => {
       if (!userAddress || !protectedDataAddress) {
         return [];
@@ -100,11 +100,11 @@ export function CreateNewContent() {
     }
 
     setLoading(true);
-    await handleDappExecutionStep();
+    await handleDappExecution();
     setLoading(false);
   };
 
-  async function handleDappExecutionStep() {
+  async function handleDappExecution() {
     resetStatuses();
     setLoading(true);
     try {
