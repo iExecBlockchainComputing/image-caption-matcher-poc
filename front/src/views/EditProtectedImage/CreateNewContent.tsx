@@ -10,9 +10,9 @@ import { Stepper } from '@/components/Stepper';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { getAppUsage } from '@/externals/getAppUsageQuery';
+import { executeDapp } from '@/modules/executeDapp';
 import useUserStore from '@/stores/useUser.store';
 import './CreateNewContent.css';
-import { executeDapp } from './executeDapp';
 
 // TODO move that to store folder
 type OneStatus = {

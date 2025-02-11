@@ -8,10 +8,10 @@ import { Stepper } from '@/components/Stepper';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import useUserStore from '@/stores/useUser.store';
+import { createProtectedData } from '../../modules/createProtectedData';
+import { executeDapp } from '../../modules/executeDapp';
+import { grantAccessProtectedData } from '../../modules/grantAccessProtectedData';
 import './CreateNewContent.css';
-import { createProtectedData } from './createProtectedData';
-import { executeDapp } from './executeDapp';
-import { grantAccessProtectedData } from './grantAccessProtectedData';
 
 const FILE_SIZE_LIMIT_IN_KB = 10_000;
 
