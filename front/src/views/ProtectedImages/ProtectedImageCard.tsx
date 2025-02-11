@@ -1,6 +1,7 @@
 import { Address } from '@/types';
 import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
 import { getCardVisualNumber } from '@/utils/getCardVisualNumber';
@@ -72,8 +73,8 @@ export function ProtectedImageCard({
             <p className="text-grey-500">{description}</p>
           </div>
         )}
-        <Button className="mx-auto" variant="outline" size="sm">
-          Edit
+        <Button className="mx-auto" asChild variant="outline" size="sm">
+          <Link to={`/protected-images/${address}/edit`}>Edit</Link>
         </Button>
       </div>
     </div>

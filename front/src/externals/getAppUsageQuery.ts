@@ -5,19 +5,21 @@ import { Address } from 'viem';
 
 export type AppForClient = App;
 
-export async function getAppUsages({
+export async function getAppUsage({
   appAddress,
   userAddress,
+  protectedDataAddress,
 }: {
   appAddress: Address;
   userAddress: Address;
+  protectedDataAddress: Address;
 }): Promise<Array<AppForClient>> {
   const appsQuery = gql(`
-      query apps($appId: ID!, $usageRequesterId: String) {
+      query apps($appId: String, $usageRequesterId: String, $dataset: String) {
         apps(where: {id: $appId}) {
           id
           usages(
-            where: {requester: $usageRequesterId}
+            where: {requester: $usageRequesterId, dataset: $dataset}
             orderBy: timestamp
             orderDirection: desc
           ) {
@@ -39,6 +41,7 @@ export async function getAppUsages({
     {
       appId: appAddress,
       usageRequesterId: userAddress,
+      dataset: protectedDataAddress,
     }
   );
 
