@@ -1,6 +1,6 @@
 import { CreateNewContent } from './CreateNewContent';
 
-export function AddProtectedImages() {
+export function AddProtectedImage() {
   return (
     <div className="grid gap-10">
       <h1>Protect new image</h1>
