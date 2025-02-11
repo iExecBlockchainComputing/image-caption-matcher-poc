@@ -1,6 +1,7 @@
 import { Address } from '@/types';
 import { OnStatusUpdateFn } from '@iexec/dataprotector';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import { getUserFriendlyStatues } from '@/utils/getUserFriendlyStatues';
 
 export const PROTECTED_DATA_TARGET_KEY = 'targetImageCaptionMatcherPoc';
 
@@ -35,20 +36,10 @@ function keepInterestingStatusUpdates(
   onStatusUpdate: GrantAccessStatusUpdateFn,
   status: OnStatusUpdateFn
 ) {
-  const trackedStatuses = new Set([
-    'FETCH_PROTECTED_DATA_ORDERBOOK',
-    'FETCH_APP_ORDERBOOK',
-    'FETCH_WORKERPOOL_ORDERBOOK',
-    'PUSH_REQUESTER_SECRET',
-    'REQUEST_TO_PROCESS_PROTECTED_DATA',
-    'CONSUME_TASK',
-    'CONSUME_RESULT_DOWNLOAD',
-    'CONSUME_RESULT_DECRYPT',
-  ]);
-
-  if (trackedStatuses.has(status.title)) {
+  const title = getUserFriendlyStatues(status.title);
+  if (title !== 'Unknown status') {
     onStatusUpdate({
-      title: status.title,
+      title,
       isDone: status.isDone ?? false,
     });
   }

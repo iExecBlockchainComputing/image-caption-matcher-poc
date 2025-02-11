@@ -3,6 +3,7 @@ import {
   type OneProtectDataStatus,
 } from '@iexec/dataprotector';
 import { getDataProtectorCoreClient } from '@/externals/iexecSdkClient';
+import { getUserFriendlyStatues } from '@/utils/getUserFriendlyStatues';
 
 export const PROTECTED_DATA_TARGET_KEY = 'targetImageCaptionMatcherPoc';
 
@@ -23,11 +24,6 @@ export async function createProtectedData({
 
   const fileAsArrayBuffer = await createArrayBufferFromFile(file);
 
-  onStatusUpdate({
-    title: 'Create protected data into DataProtector registry smart-contract',
-    isDone: false,
-  });
-
   return dataProtectorCore.protectData({
     data: {
       image: fileAsArrayBuffer,
@@ -44,22 +40,11 @@ function keepInterestingStatusUpdates(
   onStatusUpdate: CreateProtectedDataStatusUpdateFn,
   status: OneProtectDataStatus
 ) {
-  if (status.title === 'DEPLOY_PROTECTED_DATA' && status.isDone === true) {
+  const title = getUserFriendlyStatues(status.title);
+  if (title !== 'Unknown status') {
     onStatusUpdate({
-      title: 'Create protected data into DataProtector registry smart-contract',
-      isDone: true,
-    });
-
-    onStatusUpdate({
-      title: 'Push protected data encryption key to iExec SMS',
-      isDone: false,
-    });
-  }
-
-  if (status.title === 'PUSH_SECRET_TO_SMS' && status.isDone === true) {
-    onStatusUpdate({
-      title: 'Push protected data encryption key to iExec SMS',
-      isDone: true,
+      title,
+      isDone: status.isDone ?? false,
     });
   }
 }
