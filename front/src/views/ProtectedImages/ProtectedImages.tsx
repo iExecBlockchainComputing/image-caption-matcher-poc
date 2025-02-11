@@ -17,7 +17,7 @@ export function ProtectedImages() {
         return [];
       }
       const apps = await getAppUsages({
-        appAddress: '0xc8c5e295d2beda01d1fb8dd4d85a1cb769185a34',
+        appAddress: import.meta.env.VITE_APP_ADDRESS,
         userAddress,
       });
 

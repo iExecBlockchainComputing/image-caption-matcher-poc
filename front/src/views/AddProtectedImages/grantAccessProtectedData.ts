@@ -29,7 +29,7 @@ export async function grantAccessProtectedData({
   return await dataProtectorCore.grantAccess({
     protectedData: protectedDataAddress,
     authorizedUser: userAddress,
-    authorizedApp: '0xc8c5e295d2beda01d1fb8dd4d85a1cb769185a34',
+    authorizedApp: import.meta.env.VITE_APP_ADDRESS,
     numberOfAccess: 100,
     onStatusUpdate: (status) => {
       keepInterestingStatusUpdates(onStatusUpdate, status);

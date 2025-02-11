@@ -23,8 +23,8 @@ export async function executeDapp({
 
   return await dataProtectorCore.processProtectedData({
     protectedData: protectedDataAddress,
-    app: '0xc8c5e295d2beda01d1fb8dd4d85a1cb769185a34',
-    workerpool: 'debug-v8-learn.main.pools.iexec.eth',
+    app: import.meta.env.VITE_APP_ADDRESS,
+    workerpool: import.meta.env.VITE_WORKERPOOL_ADDRESS,
     args: description,
     onStatusUpdate: (status) => {
       keepInterestingStatusUpdates(onStatusUpdate, status);
