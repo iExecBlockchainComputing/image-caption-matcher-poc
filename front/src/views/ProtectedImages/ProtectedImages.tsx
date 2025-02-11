@@ -11,7 +11,7 @@ export function ProtectedImages() {
   const { address: userAddress } = useUserStore();
 
   const { data: appUsages } = useQuery({
-    queryKey: ['appUsages'],
+    queryKey: ['initialFetch', 'appUsages'],
     queryFn: async () => {
       if (!userAddress) {
         return [];
@@ -36,7 +36,7 @@ export function ProtectedImages() {
   });
 
   const { data: protectedDatas } = useQuery({
-    queryKey: ['protectedDatas'],
+    queryKey: ['initialFetch', 'protectedDatas'],
     queryFn: async () => {
       const dataProtectorCore = await getDataProtectorCoreClient();
       const protectedDatas = await dataProtectorCore.getProtectedData({

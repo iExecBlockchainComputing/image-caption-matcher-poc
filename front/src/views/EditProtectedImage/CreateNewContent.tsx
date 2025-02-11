@@ -1,6 +1,6 @@
 import { Address } from '@/types';
 import { WorkflowError } from '@iexec/dataprotector';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FormEventHandler, useState } from 'react';
 import { CheckCircle, XCircle } from 'react-feather';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -49,6 +49,7 @@ const useStatusStore = create<StatusState>((set) => ({
 
 export function CreateNewContent() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { toast } = useToast();
   const { statuses, addOrUpdateStatusToStore, resetStatuses } =
     useStatusStore();
@@ -122,6 +123,7 @@ export function CreateNewContent() {
       }
     } finally {
       setLoading(false);
+      queryClient.invalidateQueries({ queryKey: ['appUsages'] });
       navigate('/protected-images');
     }
   }

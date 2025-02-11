@@ -1,4 +1,5 @@
 import { WorkflowError } from '@iexec/dataprotector';
+import { useQueryClient } from '@tanstack/react-query';
 import { ChangeEventHandler, FormEventHandler, useRef, useState } from 'react';
 import { CheckCircle, UploadCloud, XCircle } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
@@ -50,6 +51,7 @@ const useStatusStore = create<StatusState>((set) => ({
 
 export function CreateNewContent() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { toast } = useToast();
   const { statuses, addOrUpdateStatusToStore, resetStatuses } =
     useStatusStore();
@@ -169,6 +171,7 @@ export function CreateNewContent() {
       handleError(err);
     } finally {
       setLoading(false);
+      queryClient.invalidateQueries({ queryKey: ['initialFetch'] });
       navigate('/protected-images');
     }
   }
