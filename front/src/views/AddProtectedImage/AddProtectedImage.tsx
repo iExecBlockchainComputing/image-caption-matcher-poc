@@ -9,7 +9,7 @@ export function AddProtectedImage() {
       <Button
         asChild
         variant="text"
-        className="text-s absolute -left-6 -top-12 flex items-center gap-2"
+        className="text-s absolute -top-12 -left-6 flex items-center gap-2"
       >
         <Link to="/protected-images">
           <ChevronLeft /> Home

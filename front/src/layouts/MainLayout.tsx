@@ -15,7 +15,7 @@ export default function MainLayout() {
       <NavBar />
       <div className="w-full px-10">
         <TopNavBar />
-        <div className="mb-24 mt-10 max-w-[1260px] flex-1">
+        <div className="mt-10 mb-24 max-w-[1260px] flex-1">
           {!isConnected ? <ConnectWallet /> : <Outlet />}
         </div>
       </div>

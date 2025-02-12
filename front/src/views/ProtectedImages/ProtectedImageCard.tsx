@@ -45,7 +45,7 @@ export function ProtectedImageCard({
       <div
         className={clsx(
           styles[cardVisualBg],
-          'aspect-10/6 flex grow items-center justify-center bg-cover bg-bottom'
+          'flex aspect-10/6 grow items-center justify-center bg-cover bg-bottom'
         )}
       />
       <div className="flex flex-col items-center space-y-4 px-4 py-6">

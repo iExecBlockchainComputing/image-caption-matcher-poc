@@ -14,7 +14,7 @@ export function NavBar() {
   return (
     <div className="group relative z-30 h-full flex-none lg:w-[255px]">
       <label
-        className="group/checkbox fixed right-7 top-7 z-30 flex size-5 w-[26px] origin-center transform flex-col justify-between lg:hidden"
+        className="group/checkbox fixed top-7 right-7 z-30 flex size-5 w-[26px] origin-center transform flex-col justify-between lg:hidden"
         htmlFor="menu"
         onClick={handleMenuToggle}
       >
@@ -34,7 +34,7 @@ export function NavBar() {
         <Link to="/" className="-mx-2 flex items-center p-2">
           <img src={iExecLogo} width="25" height="30" alt="iExec logo" />
 
-          <div className="ml-3 font-mono font-bold leading-5">iExec</div>
+          <div className="ml-3 font-mono leading-5 font-bold">iExec</div>
         </Link>
 
         <div className="left-navbar text-grey-400 mt-10 flex grow flex-col">
@@ -69,7 +69,7 @@ export function NavBar() {
 
           <hr className="border-grey-700 mt-6 border-t" />
 
-          <div className="mb-16 mt-10">
+          <div className="mt-10 mb-16">
             <Button
               asChild
               size="lg"

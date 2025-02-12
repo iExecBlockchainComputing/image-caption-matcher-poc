@@ -8,9 +8,7 @@ import { EIP6963ProviderDetail } from './injected-wallet-provider/types.ts';
 
 // Wagmi Client initialization
 if (!import.meta.env.VITE_REOWN_PROJECT_ID) {
-  throw new Error(
-    'You need to provide VITE_REOWN_PROJECT_ID env variable'
-  );
+  throw new Error('You need to provide VITE_REOWN_PROJECT_ID env variable');
 }
 
 export const projectId = import.meta.env.VITE_REOWN_PROJECT_ID!;

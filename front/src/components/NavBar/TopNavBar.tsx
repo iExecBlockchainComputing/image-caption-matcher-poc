@@ -10,7 +10,7 @@ export function TopNavBar() {
   return (
     <>
       {isConnected && (
-        <div className="flex w-full max-w-[1260px] items-center justify-end pr-9 pt-5 lg:pr-0 lg:pt-10">
+        <div className="flex w-full max-w-[1260px] items-center justify-end pt-5 pr-9 lg:pt-10 lg:pr-0">
           <AddressChip address={address!} className="ml-6" />
           <button
             type="button"

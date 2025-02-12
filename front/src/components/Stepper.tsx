@@ -29,7 +29,7 @@ export const Stepper: React.FC<StepperProps> = ({ currentStep, steps }) => {
               {index < stepsNb - 1 && (
                 <span
                   className={cn(
-                    'absolute right-0 top-1/2 h-px w-1/2 -translate-y-1/2 translate-x-1/2 rounded-full',
+                    'absolute top-1/2 right-0 h-px w-1/2 -translate-y-1/2 translate-x-1/2 rounded-full',
                     isCompleted ? 'bg-white' : 'bg-grey-400'
                   )}
                 />

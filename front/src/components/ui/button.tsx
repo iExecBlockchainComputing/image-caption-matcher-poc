@@ -5,7 +5,7 @@ import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { cn } from '@/utils/style.utils';
 
 const buttonVariants = cva(
-  'rounded-30 ring-offset-background focus-visible:ring-ring inline-flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap text-sm font-medium transition-colors duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'rounded-30 ring-offset-background focus-visible:ring-ring inline-flex cursor-pointer items-center justify-center gap-1.5 text-sm font-medium whitespace-nowrap transition-colors duration-300 ease-out focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
       variant: {

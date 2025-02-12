@@ -167,14 +167,14 @@ export function CreateNewContent() {
               <div className="mt-2 text-xs">Expect it to take total ~5min</div>
             </div>
           </form>
-          <div className="ml-1 mt-3 flex w-full max-w-[550px] flex-col gap-y-0.5 text-sm">
+          <div className="mt-3 ml-1 flex w-full max-w-[550px] flex-col gap-y-0.5 text-sm">
             {Object.keys(statuses).length > 0 && (
               <div className="mt-6">
                 {Object.entries(statuses).map(
                   ([message, { isDone, isError }]) => (
                     <div
                       key={message}
-                      className={`ml-2 mt-2 flex items-center gap-x-2 px-2 text-left ${isDone ? 'text-grey-500' : isError ? 'text-red-500' : 'text-white'}`}
+                      className={`mt-2 ml-2 flex items-center gap-x-2 px-2 text-left ${isDone ? 'text-grey-500' : isError ? 'text-red-500' : 'text-white'}`}
                     >
                       {isError ? (
                         <XCircle size="20" />

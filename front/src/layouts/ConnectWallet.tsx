@@ -21,17 +21,17 @@ export default function ConnectWallet() {
         </div>
 
         {/*Figma ellipse 1*/}
-        <div className="absolute left-[25%] top-[157px] size-[484px] rounded-full bg-[rgba(24,62,233,0.60)] blur-[200px]">
+        <div className="absolute top-[157px] left-[25%] size-[484px] rounded-full bg-[rgba(24,62,233,0.60)] blur-[200px]">
           &nbsp;
         </div>
 
         {/*Figma ellipse 2*/}
-        <div className="absolute left-[calc(50%-191px)] top-[15px] size-[383px] rounded-full bg-[rgba(149,49,233,0.40)] blur-[200px]">
+        <div className="absolute top-[15px] left-[calc(50%-191px)] size-[383px] rounded-full bg-[rgba(149,49,233,0.40)] blur-[200px]">
           &nbsp;
         </div>
 
         {/*Figma ellipse 3*/}
-        <div className="absolute left-[calc(50%-55px)] top-[50%] size-[306px] rounded-full bg-[rgba(188,112,253,0.40)] blur-[200px]">
+        <div className="absolute top-[50%] left-[calc(50%-55px)] size-[306px] rounded-full bg-[rgba(188,112,253,0.40)] blur-[200px]">
           &nbsp;
         </div>
       </div>
