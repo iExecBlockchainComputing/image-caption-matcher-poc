@@ -7,13 +7,13 @@ import { InjectedWalletProvider } from './injected-wallet-provider/injected-wall
 import { EIP6963ProviderDetail } from './injected-wallet-provider/types.ts';
 
 // Wagmi Client initialization
-if (!import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID) {
+if (!import.meta.env.VITE_REOWN_PROJECT_ID) {
   throw new Error(
-    'You need to provide VITE_WALLET_CONNECT_PROJECT_ID env variable'
+    'You need to provide VITE_REOWN_PROJECT_ID env variable'
   );
 }
 
-export const projectId = import.meta.env.VITE_WALLET_CONNECT_PROJECT_ID!;
+export const projectId = import.meta.env.VITE_REOWN_PROJECT_ID!;
 
 // WalletConnect metadata
 const metadata = {
