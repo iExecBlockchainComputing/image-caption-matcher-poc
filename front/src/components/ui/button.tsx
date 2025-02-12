@@ -17,7 +17,7 @@ const buttonVariants = cva(
         discreet_outline:
           'border-grey-600 hover:bg-grey-800 border hover:text-white',
         chip: 'from-grey-500 hover:before:bg-background relative z-0 overflow-hidden bg-gradient-to-b to-transparent before:absolute before:inset-px before:-z-10 before:rounded-[29px] before:bg-[#14141a] before:duration-300',
-        text: 'hover:bg-accent hover:text-accent-foreground',
+        text: '',
       },
       size: {
         lg: 'h-11 px-6 py-3 text-base',

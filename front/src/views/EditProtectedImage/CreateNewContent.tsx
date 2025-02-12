@@ -133,7 +133,7 @@ export function CreateNewContent() {
       <div className="bg-grey-800 rounded-3xl py-6">
         <Stepper
           currentStep={1}
-          steps={['Upload image', 'Edit your protected data description']}
+          steps={['Image uploaded', 'Edit your protected data description']}
         />
       </div>
       <div className="flex gap-x-8">
