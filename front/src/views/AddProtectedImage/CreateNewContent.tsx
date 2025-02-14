@@ -14,7 +14,7 @@ import { executeDapp } from '../../modules/executeDapp';
 import { grantAccessProtectedData } from '../../modules/grantAccessProtectedData';
 import './CreateNewContent.css';
 
-const FILE_SIZE_LIMIT_IN_KB = 10_000;
+const FILE_SIZE_LIMIT_IN_KB = 500;
 
 // TODO move that to store folder
 type OneStatus = {
@@ -69,6 +69,10 @@ export function CreateNewContent() {
   function handleError(err: unknown) {
     if (err instanceof WorkflowError) {
       console.error(`[Upload new content] ERROR ${err.cause}`, err);
+      toast({
+        variant: 'danger',
+        title: 'Fail to protect image',
+      });
     } else {
       console.error('[Upload new content] ERROR', err, err.data && err.data);
     }
