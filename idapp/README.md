@@ -20,7 +20,7 @@ Follow the iExec guide for setting up a local dApp:
 1. **Build the docker image non-tee**:
 
    ```sh  
-   docker build . -t image-caption-matcher  
+   docker build --tag image-caption-matcher .
     ```
 2. **Prepare input file**:  
    Create a folder called `iexec_in` and put inside a **binary zip file** containing a picture in the root of the zip file called `image`.  
@@ -64,9 +64,17 @@ Follow the iExec guide for setting up a local dApp:
 1️⃣ **Build and Push Non-TEE Image to Docker Hub**  
 
    ```sh  
-   docker build . -t yourdockerhubusername/image-caption-matcher:non-tee  
-   docker push yourdockerhubusername/image-caption-matcher:non-tee  
+   docker build --push --tag yourdockerhubusername/image-caption-matcher:non-tee .
 ```
+
+    Note: if you are building the app on a Mac with an Apple silicon CPU, run
+    this instead:
+
+   ```sh
+   docker buildx build --platform linux/amd64 --push --tag yourdockerhubusername/image-caption-matcher:non-tee .
+```
+
+
 2️⃣ **Sconify the Image** (Make it SGX-Enabled)  
 
    Modify the first three lines in `sconify.sh` to match your DockerHub username:  
