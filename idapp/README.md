@@ -67,7 +67,7 @@ Follow the iExec guide for setting up a local dApp:
    docker build --push --tag yourdockerhubusername/image-caption-matcher:non-tee .
 ```
 
-    Note: if you are building the app on a Mac with an Apple silicon CPU, run
+Note: if you are building the app on a Mac with an Apple silicon CPU, run
     this instead:
 
    ```sh
