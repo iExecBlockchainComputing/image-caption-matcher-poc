@@ -52,7 +52,7 @@ Follow the steps in idapp/README.md to:
 - Build the **SGX-compatible** Docker image  
 - Deploy the **idapp** on the **iExec decentralized cloud**  
 - Run the AI model securely inside an **enclave**  
-
+### 2️⃣ **Use The deployed iExec application in your front end using iExec Dev tools**
 Follow the steps in front/README.md to: 
 - Build and run the **front end** application
 ---
