@@ -23,8 +23,7 @@ docker run -it ${PLATFORM} \
             --fs-dir=/app \
             --host-path=/etc/hosts \
             --host-path=/etc/resolv.conf \
-            --binary=/root/miniconda/bin/python3.8 \
-            --fs-dir=/root/miniconda/lib/ \
+            --binary=/usr/local/bin/python3.8 \
             --heap=4610612736 \
             --dlopen=1 \
             && echo -e "\n------------------\n" \
