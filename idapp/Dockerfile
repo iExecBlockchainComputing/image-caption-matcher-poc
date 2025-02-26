@@ -16,11 +16,11 @@ RUN /root/miniconda/bin/pip install tf-keras
 RUN /root/miniconda/bin/pip install tensorflow
 RUN /root/miniconda/bin/pip install --upgrade Pillow
 
-RUN curl -L -o transformers.zip https://github.com/jbekkink/transformers/archive/refs/heads/main.zip \
+RUN curl -L -o transformers.zip https://github.com/iexecBlockchainComputing/transformers/archive/refs/heads/main.zip \
     && unzip transformers.zip \
     && pip install ./transformers-main
 
-RUN curl -L -o huggingface_hub.zip https://github.com/jbekkink/huggingface_hub/archive/refs/heads/main.zip \
+RUN curl -L -o huggingface_hub.zip https://github.com/iexecBlockchainComputing/huggingface_hub/archive/refs/heads/main.zip \
     && unzip huggingface_hub.zip \
     && pip install ./huggingface_hub-main
 
