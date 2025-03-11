@@ -12,9 +12,13 @@ It leverages **iExec's Trusted Execution Environments (TEE)** and the **BLIP mod
 
 ## 🏗 **Run the dApp Locally**
 
-### 1️⃣ **Set Up Your Development Environment**
-Follow the iExec guide for setting up a local dApp:  
-🔗 [Your First iExec App](https://protocol.docs.iex.ec/for-developers/your-first-app)
+## 🛠 **Prerequisites**
+
+Before running this dApp, ensure you have the following installed:
+
+- **Docker**: Version **17.05** or higher on the daemon and client.  
+- **iExec SDK**: Version **8.0.0** or higher.  
+- Familiarity with the basic concepts of **Intel® SGX** and **SCONE** framework.
 
 ### 2️⃣ **Build and Run the dApp Locally**
 1. **Build the docker image non-tee**:
@@ -60,6 +64,16 @@ Follow the iExec guide for setting up a local dApp:
 ---
 
 ## 🏗 **Deploy and Run on iExec Stack** 🌍
+## 🔐 **SCONE Account Setup**
+
+In order to follow this tutorial, you will need to **register a free SCONE Account** to access SCONE build tools and curated images from the **SCONE registry**.
+
+Once your account is activated, you need to request access to the **SCONE build tools for iExec**.
+
+```sh  
+# When your account is ready, run `docker login` to connect to the SCONE registry  
+docker login registry.scontain.com
+```
 
 1️⃣ **Build and Push Non-TEE Image to Docker Hub**  
 
