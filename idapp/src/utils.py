@@ -24,13 +24,12 @@ def forward(model, inputs):
     """ Perform forward pass with the BLIP model. """
     return model(**inputs)
 
-def deserialize_zip(zip_path, target_path, schema="binary"):
+def deserialize_zip(zip_path, schema="binary"):
     """
     Extract and deserialize data from a ZIP file stored as a binary file.
 
     Args:
         zip_path (str): Path to the binary file containing the ZIP archive.
-        target_path (str): Path inside the ZIP where the data is stored.
         schema (str): The type of data to extract (e.g., "string", "binary").
 
     Returns:
@@ -47,38 +46,40 @@ def deserialize_zip(zip_path, target_path, schema="binary"):
     with zipfile.ZipFile(io.BytesIO(zip_data), 'r') as zip_ref:
         print("Files inside ZIP:", zip_ref.namelist())  # Debugging output
 
-        if target_path not in zip_ref.namelist():
-            raise FileNotFoundError(f"Path '{target_path}' not found in ZIP")
+        for file_name in zip_ref.namelist():
+            if file_name.endswith('/'):
+                continue
 
-        with zip_ref.open(target_path) as file:
-            data = file.read()
+            try:
+                with zip_ref.open(file_name) as file:
+                    data = file.read()
 
-            # Deserialize based on schema
-            if schema == "string":
-                return data.decode('utf-8')
-            elif schema == "bool":
-                return bool(int.from_bytes(data, byteorder="big"))
-            elif schema == "number":
-                return float(data.decode('utf-8'))
-            elif schema == "binary":
-                return data
-            else:
-                raise ValueError(f"Unsupported schema: {schema}")
+                # Attempt to load the file as an image
+                with Image.open(io.BytesIO(data)) as test_img:
+                    test_img.verify()  # Validate the image
 
-def get_protected_image(zip_path, image_path="image"):
+                print(f"Found image: {file_name}")
+                return file_name, data
+
+            except Exception as e:
+                print(f"File {file_name} is not a valid image: {e}")
+                continue
+
+        raise FileNotFoundError("No valid image found in the ZIP file")
+
+def get_protected_image(zip_path):
     """
-    Extracts an image from a protected ZIP file.
+    Extracts an image from a protected ZIP file, regardless of its name.
 
     Args:
         zip_path (str): Path to the ZIP file.
-        image_path (str): Path inside the ZIP where the image is stored.
 
     Returns:
         PIL Image: The extracted image.
     """
-    image_data = deserialize_zip(zip_path, image_path, "binary")
+    file_name, image_data = deserialize_zip(zip_path)
 
     try:
         return Image.open(io.BytesIO(image_data)).convert('RGB')
     except Exception as e:
-        raise ValueError(f"Failed to load extracted image: {e}")
+        raise ValueError(f"Failed to load extracted image {file_name}: {e}")

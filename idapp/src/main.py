@@ -36,7 +36,7 @@ if __name__ == '__main__':
     description = " ".join(sys.argv[1:])
 
     try:
-        image = get_protected_image(zip_path, image_path_in_zip)
+        image = get_protected_image(zip_path)
     except Exception as e:
         writeOutput(f"Failed to extract image: {str(e)}")
         sys.exit(1)
